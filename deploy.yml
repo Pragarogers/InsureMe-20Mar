@@ -15,5 +15,8 @@
     command: sudo systemctl start docker
     become: yes
     become_user: root
+  - name: Delete existing docker container
+    command: docker rm -f insureme
+    ignore_errors: true
   - name: Deploy the Image from DockerHub and Run as Container
-    command: docker run -itd -p 9094:8081 pragarogers/insureme
+    command: docker run --name insureme -itd -p 9094:8081 pragarogers/insureme
